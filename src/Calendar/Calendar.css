@@ -1,0 +1,36 @@
+/* container */
+.custom_calendar__container {
+    border: 1px solid blue;
+    padding: 10px;
+}
+
+.custom_calendar_content__wrapper {
+    border: 1px solid red;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 1fr;
+    gap: 5px;
+}
+
+/* day */
+.custom_day__container {
+    border: 1px solid yellow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom_day_title__container {
+    border: 1px solid green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* month control */
+.custon_month_control__container {
+    border: 1px solid pink;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
