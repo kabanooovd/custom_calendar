@@ -27,8 +27,15 @@
     align-items: center;
 }
 
+.custom_next_day__container {
+    border: 1px solid purple;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* month control */
-.custon_month_control__container {
+.custom_month_control__container {
     border: 1px solid pink;
     display: flex;
     justify-content: space-between;
