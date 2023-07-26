@@ -33,12 +33,21 @@ export const Calendar = () => {
         alert(onGetIsoStringWithNoTimeZone(day));
     };
 
+    const onSwitchMonth = (option: "next" | "prev") => {
+        if (option === "next") {
+            setCurrnetMonth(val => val + 1)
+        }
+        if (option === "prev") {
+            setCurrnetMonth(val => val - 1)
+        }
+    }
+
     return (
         <div className="custom_calendar__container">
             <div className="custom_month_control__container">
-                <div>&larr;</div>
+                <div onClick={() => onSwitchMonth("prev")}>&#60;</div>
                 <span>{MONTHS_MAPPER[currnetMonth]}</span>
-                <div>&rarr;</div>
+                <div onClick={() => onSwitchMonth("next")}>&#62;</div>
             </div>
             <div className="custom_calendar_content__wrapper">
                 {weekDays.map((_, idx) => (
