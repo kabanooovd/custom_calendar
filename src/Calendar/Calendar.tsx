@@ -24,7 +24,10 @@ export const Calendar = () => {
     const firstWeekDay = WEEK_DAYS_MAPPER[_firstWeekDay];
     const lastWeekDay = WEEK_DAYS_MAPPER[_lastWeekDay];
     const prevDays = onGetPrevDays(
-        onGetDaysInMonth(currnetMonth > 1 ? currnetMonth - 1 : 12, currnetMonth > 1 ? currentYear : currentYear - 1),
+        onGetDaysInMonth(
+            currnetMonth > 1 ? currnetMonth - 1 : 12,
+            currnetMonth > 1 ? currentYear : currentYear - 1
+        ),
         firstWeekDay
     );
 
@@ -36,7 +39,21 @@ export const Calendar = () => {
         alert(onGetIsoStringWithNoTimeZone(day));
     };
 
-    // TODO: Создать и обработать выбор года
+    // TODO: Создать и обработать выбор года и создать ф-ю карусел чисел
+    const foo = (num: number, max: number, opt: "+" | "-"): number => {
+
+        let response = opt === "+" ? num + 1 : num - 1;
+
+        if (num >= max) {
+            response = 0;
+        } else if (num < 0) {
+            response =  max;
+        }
+
+        return response
+    };
+
+    console.log("==> " , foo(12, 12, "+"))
 
     const onSwitchMonth = (option: "next" | "prev") => {
         option === "next" && setCurrnetMonth((val) => (val < 12 ? val + 1 : 1));
