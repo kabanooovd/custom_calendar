@@ -3,8 +3,10 @@ import "./Calendar.css";
 import {
     MONTHS_MAPPER,
     WEEK_DAYS_MAPPER,
+    WEEK_DAYS_RUS_MAPPER,
     onGetDaysInMonth,
     onGetIsoStringWithNoTimeZone,
+    onGetPrevDays,
 } from "./utils";
 import { Days } from "./Day/Days";
 
@@ -15,32 +17,31 @@ export const Calendar = () => {
 
     const [currnetMonth, setCurrnetMonth] = React.useState(_currnetMonth);
     const [currentYear, setCurrentYear] = React.useState(_currentYear);
-    const [currentDaysList, setCurrentDaysList] = React.useState(
-        onGetDaysInMonth(currnetMonth, currentYear)
-    );
-    const firstWeekDay = currentDaysList[0].getDay();
-    const lastWeekDay = currentDaysList[currentDaysList.length - 1].getDay();
+    const currentDaysList = onGetDaysInMonth(currnetMonth, currentYear);
+    const _firstWeekDay = currentDaysList[0].getDay();
+    const _lastWeekDay = currentDaysList[currentDaysList.length - 1].getDay();
     const weekDays = new Array(7).fill(null);
-    const prevDays = onGetDaysInMonth(currnetMonth - 1, currentYear).slice(
-        -firstWeekDay + 1
-    );
-    const nexDays = onGetDaysInMonth(currnetMonth + 1, currentYear).slice(
-        0,
-        7 - lastWeekDay
+    const firstWeekDay = WEEK_DAYS_MAPPER[_firstWeekDay];
+    const lastWeekDay = WEEK_DAYS_MAPPER[_lastWeekDay];
+    const prevDays = onGetPrevDays(
+        onGetDaysInMonth(currnetMonth > 1 ? currnetMonth - 1 : 12, currnetMonth > 1 ? currentYear : currentYear - 1),
+        firstWeekDay
     );
 
+    const nexDays = onGetDaysInMonth(currnetMonth + 1, currentYear).slice(
+        0,
+        6 - lastWeekDay
+    );
     const onClickDay = (day: Date) => {
         alert(onGetIsoStringWithNoTimeZone(day));
     };
 
+    // TODO: Создать и обработать выбор года
+
     const onSwitchMonth = (option: "next" | "prev") => {
-        if (option === "next") {
-            setCurrnetMonth(val => val + 1)
-        }
-        if (option === "prev") {
-            setCurrnetMonth(val => val - 1)
-        }
-    }
+        option === "next" && setCurrnetMonth((val) => (val < 12 ? val + 1 : 1));
+        option === "prev" && setCurrnetMonth((val) => (val > 1 ? val - 1 : 12));
+    };
 
     return (
         <div className="custom_calendar__container">
@@ -52,7 +53,7 @@ export const Calendar = () => {
             <div className="custom_calendar_content__wrapper">
                 {weekDays.map((_, idx) => (
                     <div key={idx} className="custom_day_title__container">
-                        {WEEK_DAYS_MAPPER[idx]}
+                        {WEEK_DAYS_RUS_MAPPER[idx]}
                     </div>
                 ))}
                 <Days
@@ -63,10 +64,7 @@ export const Calendar = () => {
                     days={currentDaysList}
                     className={"custom_day__container"}
                 />
-                <Days
-                    days={nexDays}
-                    className={"custom_next_day__container"}
-                />
+                <Days days={nexDays} className={"custom_next_day__container"} />
             </div>
         </div>
     );
