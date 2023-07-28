@@ -1,5 +1,10 @@
 import { Day } from "../Day/Day";
-import { WEEK_DAYS_RUS_MAPPER } from "../utils";
+import { Year } from "../Year/Year";
+import {
+    TCalendarMode,
+    ToperationOption,
+    WEEK_DAYS_RUS_MAPPER,
+} from "../utils";
 import "./DaysList.css";
 
 export const DaysList: React.FC<{
@@ -8,8 +13,9 @@ export const DaysList: React.FC<{
     prevDays: Date[];
     currentDaysList: Date[];
     nexDays: Date[];
-    onSwitchYear: (option: "next" | "prev") => void;
-    onSwitchMonth: (option: "next" | "prev") => void;
+    onSwitchYear: (option: ToperationOption) => void;
+    onSwitchMonth: (option: ToperationOption) => void;
+    setMode: (mode: TCalendarMode) => void;
 }> = (props) => {
     const {
         currnetMonth,
@@ -19,23 +25,16 @@ export const DaysList: React.FC<{
         nexDays,
         onSwitchYear,
         onSwitchMonth,
+        setMode,
     } = props;
 
     const weekDays = new Array(7).fill(null);
     return (
         <>
-            <div className="custom_years_control__container">
-                <div onClick={() => onSwitchYear("prev")}>
-                    {currentYear - 1}
-                </div>
-                <div>{currentYear}</div>
-                <div onClick={() => onSwitchYear("next")}>
-                    {currentYear + 1}
-                </div>
-            </div>
+            <Year currentYear={currentYear} onSwitchYear={onSwitchYear} />
             <div className="custom_month_control__container">
                 <div onClick={() => onSwitchMonth("prev")}>&#60;</div>
-                <span>{currnetMonth}</span>
+                <span onClick={() => setMode("months")}>{currnetMonth}</span>
                 <div onClick={() => onSwitchMonth("next")}>&#62;</div>
             </div>
             <div className="custom_dayslist_content__wrapper">

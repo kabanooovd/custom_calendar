@@ -1,3 +1,8 @@
+
+export type ToperationOption = "prev" | "next"
+export type TDayKind = "current" | ToperationOption
+export type TCalendarMode = "days" | "months" | "years"
+
 // метод формерует список дней из месяца
 export const onGetDaysInMonth = (month: number, year: number): Date[] =>
     new Array(31)
@@ -24,9 +29,9 @@ export const onFormatDate = (date: string) => {
 export const onGetOtherMonthDays = (
     otherMonthDaysList: Date[],
     weekDayOfCurrentMonth: number,
-    opt: "prev" | "next"
+    opt: ToperationOption
 ): Date[] => {
-    const MAPPER: Record<"prev" | "next", Date[]> = {
+    const MAPPER: Record<ToperationOption, Date[]> = {
         prev: [],
         next: otherMonthDaysList.slice(0, 6),
     };

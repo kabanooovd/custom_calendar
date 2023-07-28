@@ -46,24 +46,10 @@ span {
     transition: all 0.5s;
 }
 
-/* years control */
-.custom_years_control__container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 1fr;
-    gap: 1px;
-}
-
-.custom_years_control__container div {
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f3f3f3;
-    padding: 10px;
+.custom_month_control__container span:hover {
+    background-color: rgb(82, 82, 82);
     transition: all 0.5s;
-}
-
-.custom_years_control__container div:hover {
-    background-color: #dbdada;
+    width: 130px;
+    border-radius: 4px;
+    color: #ffffff;
 }

@@ -1,0 +1,22 @@
+/* years control */
+.custom_years_control__container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    border-radius: 4px;
+    gap: 10px;
+}
+
+.custom_years_control__container div {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f3f3f3;
+    padding: 10px;
+    transition: all 0.5s;
+}
+
+.custom_years_control__container div:hover {
+    background-color: #dbdada;
+}

@@ -1,6 +1,5 @@
+import { TDayKind } from "../utils";
 import "./Day.css"
-
-type TDayKind = "current" | "prev" | "next" 
 
 export const Day: React.FC<{ days: Date[]; kind: TDayKind }> = (props) => {
     const { days, kind } = props;
