@@ -39,29 +39,35 @@ export const Calendar = () => {
         alert(onGetIsoStringWithNoTimeZone(day));
     };
 
-    // TODO: Создать и обработать выбор года и создать ф-ю карусел чисел
-    const foo = (num: number, max: number, opt: "+" | "-"): number => {
-
-        let response = opt === "+" ? num + 1 : num - 1;
-
-        if (num >= max) {
-            response = 0;
-        } else if (num < 0) {
-            response =  max;
-        }
-
-        return response
-    };
-
-    console.log("==> " , foo(12, 12, "+"))
+    // console.log("==> " , foo(12, 12, "+"))
 
     const onSwitchMonth = (option: "next" | "prev") => {
-        option === "next" && setCurrnetMonth((val) => (val < 12 ? val + 1 : 1));
-        option === "prev" && setCurrnetMonth((val) => (val > 1 ? val - 1 : 12));
+        if (option === "next") {
+            setCurrnetMonth((month) => (month < 12 ? month + 1 : 1));
+            setCurrentYear((year) => (currnetMonth < 12 ? year : year + 1));
+        }
+        if (option === "prev") {
+            setCurrnetMonth((month) => (month > 1 ? month - 1 : 12));
+            setCurrentYear((year) => (currnetMonth === 1 ? year - 1 : year));
+        }
+    };
+
+    const onSwitchYear = (option: "next" | "prev") => {
+        option === "next" && setCurrentYear((year) => year + 1);
+        option === "prev" && setCurrentYear((year) => year - 1);
     };
 
     return (
         <div className="custom_calendar__container">
+            <div className="custom_years_control__container">
+                <div onClick={() => onSwitchYear("prev")}>
+                    {currentYear - 1}
+                </div>
+                <div>{currentYear}</div>
+                <div onClick={() => onSwitchYear("next")}>
+                    {currentYear + 1}
+                </div>
+            </div>
             <div className="custom_month_control__container">
                 <div onClick={() => onSwitchMonth("prev")}>&#60;</div>
                 <span>{MONTHS_MAPPER[currnetMonth]}</span>

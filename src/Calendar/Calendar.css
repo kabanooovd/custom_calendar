@@ -1,11 +1,11 @@
 /* container */
 .custom_calendar__container {
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     border-radius: 16px;
     margin-bottom: 0;
     padding: 30px;
     transition: margin-bottom 0.3s;
-    transition-timing-function: cubic-bezier(.25,1.9,.71,.56);
+    transition-timing-function: cubic-bezier(0.25, 1.9, 0.71, 0.56);
 }
 
 .custom_calendar__container:hover {
@@ -36,7 +36,6 @@
     justify-content: center;
     align-items: center;
     padding: 9px;
-
 }
 
 .custom_next_day__container {
@@ -47,7 +46,6 @@
     align-items: center;
     padding: 9px;
     border-radius: 10px;
-
 }
 
 /* month control */
@@ -58,8 +56,9 @@
     margin-bottom: 30px;
 }
 
-.custom_month_control__container div {
+.custom_month_control__container div, span {
     cursor: pointer;
+    margin-top: 20px;
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -70,4 +69,27 @@
 
 .custom_month_control__container div:hover {
     background-color: rgb(228, 228, 228);
+    transition: all 0.5s;
+}
+
+/* years control */
+.custom_years_control__container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    gap: 1px;
+}
+
+.custom_years_control__container div {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f3f3f3;
+    padding: 10px;
+    transition: all 0.5s;
+}
+
+.custom_years_control__container div:hover {
+    background-color: #dbdada;
 }
