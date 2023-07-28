@@ -20,16 +20,22 @@ export const onFormatDate = (date: string) => {
     };
 };
 
-// Метод принимает список дат пред месяца и номер дня текущей недели
-export const onGetPrevDays = (
-    prevMonthDaysList: Date[],
-    firstWeekDayOfCurrentMonth: number
+// Метод принимает список дней в месяце, номер дня недели по ЖС и опцию (последняя неделя предыдущего месяца или 1я неделя следующего месяца)
+export const onGetOtherMonthDays = (
+    otherMonthDaysList: Date[],
+    weekDayOfCurrentMonth: number,
+    opt: "prev" | "next"
 ): Date[] => {
-    if (firstWeekDayOfCurrentMonth > 0) {
-        // console.log("==> ", firstWeekDayOfCurrentMonth)
-        return prevMonthDaysList.slice(-firstWeekDayOfCurrentMonth);
+    const MAPPER: Record<"prev" | "next", Date[]> = {
+        prev: [],
+        next: otherMonthDaysList.slice(0, 6),
+    };
+    const day = (weekDayOfCurrentMonth === 0 ? 7 : weekDayOfCurrentMonth) - 1;
+    if (day > 0) {
+        if (opt === "prev") return otherMonthDaysList.slice(-day);
+        if (opt === "next") return otherMonthDaysList.slice(0, 6 - day);
     }
-    return [];
+    return MAPPER[opt];
 };
 
 export const MONTHS_MAPPER: Record<number, string> = {
@@ -55,14 +61,4 @@ export const WEEK_DAYS_RUS_MAPPER: Record<number, string> = {
     4: "Пт",
     5: "Сб",
     6: "Вс",
-};
-
-export const WEEK_DAYS_MAPPER: Record<number, number> = {
-    1: 0, 
-    2: 1, 
-    3: 2, 
-    4: 3, 
-    5: 4, 
-    6: 5, 
-    0: 6, 
 };

@@ -2,17 +2,16 @@ import React from "react";
 import "./Calendar.css";
 import {
     MONTHS_MAPPER,
-    WEEK_DAYS_MAPPER,
     WEEK_DAYS_RUS_MAPPER,
     onGetDaysInMonth,
-    onGetPrevDays,
+    onGetOtherMonthDays,
 } from "./utils";
 import { Days } from "./Day/Days";
 
 export const Calendar = () => {
 
 
-    const currentDate =                         new Date("2023/07/25");
+    const currentDate =                         new Date();
     const initialMonth =                        currentDate.getMonth() + 1;
     const initialYear =                         currentDate.getFullYear();
     const [currnetMonth, setCurrnetMonth] =     React.useState(initialMonth);
@@ -21,24 +20,12 @@ export const Calendar = () => {
     const initWeekDayInMonth =                  currentDaysList[0].getDay();
     const endWeekDayInMonth =                   currentDaysList[currentDaysList.length - 1].getDay();
     const weekDays =                            new Array(7).fill(null);
-    const firstWeekDay =                        WEEK_DAYS_MAPPER[initWeekDayInMonth];
-    const lastWeekDay =                         WEEK_DAYS_MAPPER[endWeekDayInMonth];
-    const prevDays =                            onGetPrevDays(
-                                                    onGetDaysInMonth(
-                                                        currnetMonth > 1 ? currnetMonth - 1 : 12,
-                                                        currnetMonth > 1 ? currentYear : currentYear - 1
-                                                    ),
-                                                    firstWeekDay
-                                                );
-
-    const nexDays =                             onGetDaysInMonth(currnetMonth + 1, currentYear)
-                                                    .slice(0, 6 - lastWeekDay);
+    const prevDays =                            onGetOtherMonthDays(onGetDaysInMonth(currnetMonth, currentYear), initWeekDayInMonth, "prev");
+    const nexDays =                             onGetOtherMonthDays(onGetDaysInMonth(currnetMonth, currentYear), endWeekDayInMonth, "next");
 
 
 
 
-
-    // console.log("==> " , foo(12, 12, "+"))
 
     const onSwitchMonth = (option: "next" | "prev") => {
         if (option === "next") {

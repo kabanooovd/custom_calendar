@@ -4,12 +4,6 @@
     border-radius: 16px;
     margin-bottom: 0;
     padding: 30px;
-    transition: margin-bottom 0.3s;
-    transition-timing-function: cubic-bezier(0.25, 1.9, 0.71, 0.56);
-}
-
-.custom_calendar__container:hover {
-    margin-bottom: 20px;
 }
 
 .custom_calendar_content__wrapper {
