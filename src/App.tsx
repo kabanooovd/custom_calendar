@@ -1,20 +1,10 @@
-import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import { Calendar } from "./Calendar/Calendar";
+import { Conrainer } from "./CalendarContainer/Conrainer";
 
 function App() {
     return (
         <div className="App">
-            <input type="date" />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-
-            <Calendar />
+            <Conrainer />
         </div>
     );
 }
