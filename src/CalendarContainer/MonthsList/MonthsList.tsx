@@ -24,10 +24,15 @@ export const MonthsList: React.FC<{
                         onSetMonth(month);
                         setMode("days");
                     };
+                    const isToMonth = new Date().getMonth() === month;
                     return (
                         <div
                             key={`${idx}${month}`}
-                            className="months__item"
+                            className={
+                                isToMonth
+                                    ? "months_current__item"
+                                    : "months__item"
+                            }
                             onClick={onHandleClick}
                         >
                             {MONTHS_MAPPER[month]}

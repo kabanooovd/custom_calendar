@@ -24,27 +24,6 @@ export const onFormatDate = (date: string) => {
     };
 };
 
-// Метод проверяет свойство входящей даты с указанными свойствами сегодняшней даты
-export const onCheckCurrentDateProp = (
-    incomingDate: Date,
-    dateProp: TCalendarMode
-): boolean => {
-    const today = new Date();
-    switch (dateProp) {
-        case "days":
-            return (
-                today.getDate() === incomingDate.getDate() &&
-                today.getMonth() === incomingDate.getMonth()
-            );
-        case "months":
-            return today.getMonth() === incomingDate.getMonth();
-        case "years":
-            return today.getFullYear() === incomingDate.getFullYear();
-        default:
-            return false;
-    }
-};
-
 // Метод принимает список дней в месяце, номер дня недели по ЖС и опцию (последняя неделя предыдущего месяца или 1я неделя следующего месяца)
 export const onGetOtherMonthDays = (
     otherMonthDaysList: Date[],

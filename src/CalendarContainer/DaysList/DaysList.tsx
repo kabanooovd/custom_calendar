@@ -16,7 +16,7 @@ export const DaysList: React.FC<{
     onSwitchYear: (option: ToperationOption) => void;
     onSwitchMonth: (option: ToperationOption) => void;
     setMode: (mode: TCalendarMode) => void;
-    onSetChosenDate: (value: Date) => void
+    onSetChosenDate: (value: Date) => void;
 }> = (props) => {
     const {
         currnetMonth,
@@ -49,9 +49,13 @@ export const DaysList: React.FC<{
                         {WEEK_DAYS_RUS_MAPPER[idx]}
                     </div>
                 ))}
-                <Day days={prevDays} kind="prev" />
-                <Day days={currentDaysList} kind="current" onSetChosenDate={onSetChosenDate} />
-                <Day days={nexDays} kind="next" />
+                <Day days={prevDays} className={"other_day"} />
+                <Day
+                    days={currentDaysList}
+                    className={"current_day"}
+                    onSetChosenDate={onSetChosenDate}
+                />
+                <Day days={nexDays} className={"other_day"} />
             </div>
         </>
     );

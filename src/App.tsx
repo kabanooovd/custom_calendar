@@ -3,10 +3,10 @@ import "./App.css";
 import { Conrainer } from "./CalendarContainer/Conrainer";
 
 function App() {
-    const [date, setDate] = React.useState<Date | null>(null)
+    const [date, setDate] = React.useState<Date | null>(null);
     return (
         <div className="App">
-            {date && <h1>Вы выбрали: {date.toLocaleDateString('ru')}</h1>}
+            {date && <h1>Вы выбрали: {date.toLocaleDateString("ru")}</h1>}
             <Conrainer value={date} onChange={setDate} />
         </div>
     );

@@ -30,10 +30,15 @@ export const YearsList: React.FC<{
                         setCurrentYear(year);
                         setMode("months");
                     };
+                    const isToMonth = new Date().getFullYear() === year;
                     return (
                         <div
                             key={year}
-                            className="years__item"
+                            className={
+                                isToMonth
+                                    ? "years_current__item"
+                                    : "years__item"
+                            }
                             onClick={onHandleClick}
                         >
                             {year}

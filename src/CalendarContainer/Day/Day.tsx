@@ -1,35 +1,24 @@
-import { TDayKind, onCheckCurrentDateProp } from "../utils";
 import "./Day.css";
 
 export const Day: React.FC<{
     days: Date[];
-    kind: TDayKind;
+    className: string;
     onSetChosenDate?: (value: Date) => void;
 }> = (props) => {
-    const { days, kind, onSetChosenDate } = props;
-
-    const STYLES_MAPPER: Record<TDayKind, string> = {
-        current: "current_day",
-        next: "other_day",
-        prev: "other_day",
-    };
-
+    const { days, className, onSetChosenDate } = props;
     return (
         <>
             {days.map((date) => {
                 const currentDate = date.getDate();
                 const _key = `${currentDate}_${date.getMonth()}`;
                 const isWeekend = date.getDay() === 6 || date.getDay() === 0;
-                const className = [
-                    onCheckCurrentDateProp(date, "days")
-                        ? "current_today"
-                        : STYLES_MAPPER[kind],
-                    isWeekend ? "weekend" : "",
-                ].join(" ");
+                const today = new Date();
+                const isToday = today.getDate() === date.getDate() && today.getMonth() === date.getMonth()
+                const _classname = [className, isWeekend ? "weekend" : ""].join(" ");
                 return (
                     <div
                         key={_key}
-                        className={className}
+                        className={isToday ? "current_today" : _classname}
                         onClick={() => onSetChosenDate && onSetChosenDate(date)}
                     >
                         {currentDate}
