@@ -1,0 +1,12 @@
+.yaers__wrapper {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr;
+    gap: 10px;
+}
+
+.years__item {
+    cursor: pointer;
+    background-color: #f5f5f5;
+    padding: 10px;
+}

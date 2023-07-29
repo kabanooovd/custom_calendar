@@ -31,7 +31,11 @@ export const DaysList: React.FC<{
     const weekDays = new Array(7).fill(null);
     return (
         <>
-            <Year currentYear={currentYear} onSwitchYear={onSwitchYear} />
+            <Year
+                currentYear={currentYear}
+                onSwitchYear={onSwitchYear}
+                setMode={setMode}
+            />
             <div className="custom_month_control__container">
                 <div onClick={() => onSwitchMonth("prev")}>&#60;</div>
                 <span onClick={() => setMode("months")}>{currnetMonth}</span>

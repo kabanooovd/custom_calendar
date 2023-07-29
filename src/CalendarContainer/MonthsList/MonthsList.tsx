@@ -13,7 +13,11 @@ export const MonthsList: React.FC<{
     while (monthsList.length < 12) monthsList.push(monthsList.length + 1);
     return (
         <div className="months__container">
-            <Year currentYear={currentYear} onSwitchYear={onSwitchYear} />
+            <Year
+                currentYear={currentYear}
+                onSwitchYear={onSwitchYear}
+                setMode={setMode}
+            />
             <div className="months__wrapper">
                 {monthsList.map((month, idx) => {
                     const onHandleClick = () => {

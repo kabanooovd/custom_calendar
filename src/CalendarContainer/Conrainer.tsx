@@ -8,6 +8,7 @@ import {
 } from "./utils";
 import { DaysList } from "./DaysList/DaysList";
 import { MonthsList } from "./MonthsList/MonthsList";
+import { YearsList } from "./YearsList/YearsList";
 
 export const Conrainer = () => {
     const currentDate                       =   new Date();
@@ -57,6 +58,13 @@ export const Conrainer = () => {
                     onSwitchYear={onSwitchYear}
                     onSetMonth={setCurrnetMonth}
                     currentYear={currentYear}
+                    setMode={setMode}
+                />
+            )}
+            {mode === "years" && (
+                <YearsList
+                    currentYear={currentYear}
+                    setCurrentYear={setCurrentYear}
                     setMode={setMode}
                 />
             )}
