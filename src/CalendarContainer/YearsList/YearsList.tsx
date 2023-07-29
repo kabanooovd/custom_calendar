@@ -1,4 +1,5 @@
-import { TCalendarMode } from "../utils";
+import React from "react";
+import { TCalendarMode, ToperationOption } from "../utils";
 import "./YearsList.css";
 
 export const YearsList: React.FC<{
@@ -7,27 +8,39 @@ export const YearsList: React.FC<{
     setMode: (mode: TCalendarMode) => void;
 }> = (props) => {
     const { currentYear, setCurrentYear, setMode } = props;
-
-    const yaersList = Array(25)
+    const _yaersList = Array(25)
         .fill(null)
         .map((_, idx) => idx + currentYear);
+
+    const [yaersList, setYearsList] = React.useState<number[]>(_yaersList);
+    const onHandleYearsList = (opt: ToperationOption) => {
+        opt === "next" && setYearsList((years) => years.map((y) => y + 25));
+        opt === "prev" && setYearsList((years) => years.map((y) => y - 25));
+    };
+
     return (
-        <div className="yaers__wrapper">
-            {yaersList.map((year) => {
-                const onHandleClick = () => {
-                    setCurrentYear(year);
-                    setMode("months");
-                };
-                return (
-                    <div
-                        key={year}
-                        className="years__item"
-                        onClick={onHandleClick}
-                    >
-                        {year}
-                    </div>
-                );
-            })}
-        </div>
+        <>
+            <div className="btn__wrapper">
+                <button onClick={() => onHandleYearsList("prev")}>&#60;</button>
+                <button onClick={() => onHandleYearsList("next")}>&#62;</button>
+            </div>
+            <div className="yaers__wrapper">
+                {yaersList.map((year) => {
+                    const onHandleClick = () => {
+                        setCurrentYear(year);
+                        setMode("months");
+                    };
+                    return (
+                        <div
+                            key={year}
+                            className="years__item"
+                            onClick={onHandleClick}
+                        >
+                            {year}
+                        </div>
+                    );
+                })}
+            </div>
+        </>
     );
 };

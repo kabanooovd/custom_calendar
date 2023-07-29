@@ -1,7 +1,22 @@
+
+.btn__wrapper {
+    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.btn__wrapper button {
+    cursor: pointer;
+    border: none;
+    background-color: #f5f5f5;
+    padding: 10px;
+    transition: all 0.5s;
+}
+
 .yaers__wrapper {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: 1fr;
     gap: 10px;
 }
 
@@ -9,4 +24,11 @@
     cursor: pointer;
     background-color: #f5f5f5;
     padding: 10px;
+    transition: all 0.5s;
+}
+
+.years__item:hover,
+.btn__wrapper button:hover {
+    background-color: #313131;
+    color: #FFFFFF;
 }
