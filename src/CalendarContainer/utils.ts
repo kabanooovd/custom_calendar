@@ -1,7 +1,6 @@
-
-export type ToperationOption = "prev" | "next"
-export type TDayKind = "current" | ToperationOption
-export type TCalendarMode = "days" | "months" | "years"
+export type ToperationOption = "prev" | "next";
+export type TDayKind = "current" | ToperationOption;
+export type TCalendarMode = "days" | "months" | "years";
 
 // метод формерует список дней из месяца
 export const onGetDaysInMonth = (month: number, year: number): Date[] =>
@@ -23,6 +22,27 @@ export const onFormatDate = (date: string) => {
         date: date.split("T", 1)[0],
         time: date.split("T", 2)[1].split(".")[0],
     };
+};
+
+// Метод проверяет свойство входящей даты с указанными свойствами сегодняшней даты
+export const onCheckCurrentDateProp = (
+    incomingDate: Date,
+    dateProp: TCalendarMode
+): boolean => {
+    const today = new Date();
+    switch (dateProp) {
+        case "days":
+            return (
+                today.getDate() === incomingDate.getDate() &&
+                today.getMonth() === incomingDate.getMonth()
+            );
+        case "months":
+            return today.getMonth() === incomingDate.getMonth();
+        case "years":
+            return today.getFullYear() === incomingDate.getFullYear();
+        default:
+            return false;
+    }
 };
 
 // Метод принимает список дней в месяце, номер дня недели по ЖС и опцию (последняя неделя предыдущего месяца или 1я неделя следующего месяца)

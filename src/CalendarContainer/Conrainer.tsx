@@ -5,8 +5,9 @@ import { DaysList } from "./DaysList/DaysList";
 import { MonthsList } from "./MonthsList/MonthsList";
 import { YearsList } from "./YearsList/YearsList";
 
-export const Conrainer = () => {
-    const currentDate                       =   new Date();
+export const Conrainer: React.FC<{ value: Date | null, onChange: (value: Date) => void }> = (props) => {
+    const {value, onChange} = props
+    const currentDate                       =   value || new Date();
     const initialMonth                      =   currentDate.getMonth() + 1;
     const initialYear                       =   currentDate.getFullYear();
     const [mode, setMode]                   =   React.useState<TCalendarMode>("days");
@@ -15,8 +16,8 @@ export const Conrainer = () => {
     const currentDaysList                   =   onGetDaysInMonth(currnetMonth, currentYear);
     const initWeekDayInMonth                =   currentDaysList[0].getDay();
     const endWeekDayInMonth                 =   currentDaysList[currentDaysList.length - 1].getDay();
-    const prevDays                          =   onGetOtherMonthDays(onGetDaysInMonth(currnetMonth, currentYear), initWeekDayInMonth, "prev");
-    const nexDays                           =   onGetOtherMonthDays(onGetDaysInMonth(currnetMonth, currentYear), endWeekDayInMonth, "next");
+    const prevDays                          =   onGetOtherMonthDays(onGetDaysInMonth(currnetMonth - 1, currentYear), initWeekDayInMonth, "prev");
+    const nexDays                           =   onGetOtherMonthDays(onGetDaysInMonth(currnetMonth + 1, currentYear), endWeekDayInMonth, "next");
 
     const onSwitchMonth = (option: ToperationOption) => {
         if (option === "next") {
@@ -68,6 +69,7 @@ export const Conrainer = () => {
                         onSwitchMonth={onSwitchMonth}
                         onSwitchYear={onSwitchYear}
                         setMode={setMode}
+                        onSetChosenDate={onChange}
                     />
                 </div>
             );

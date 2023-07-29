@@ -1,17 +1,9 @@
-/* container */
-.custom_calendar__container {
-    background-color: #ffffff;
-    border-radius: 16px;
-    margin-bottom: 0;
-    padding: 30px;
-}
-
 /* days */
 .custom_dayslist_content__wrapper {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: 1fr;
-    gap: 10px;
+    gap: 6px;
 }
 
 .custom_day_title__dayslist {
