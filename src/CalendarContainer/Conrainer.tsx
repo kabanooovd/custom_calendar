@@ -1,11 +1,6 @@
 import React from "react";
 import "./Conrainer.css";
-import {
-    MONTHS_MAPPER,
-    TCalendarMode,
-    onGetDaysInMonth,
-    onGetOtherMonthDays,
-} from "./utils";
+import { MONTHS_MAPPER, TCalendarMode, ToperationOption, onGetDaysInMonth, onGetOtherMonthDays } from "./utils";
 import { DaysList } from "./DaysList/DaysList";
 import { MonthsList } from "./MonthsList/MonthsList";
 import { YearsList } from "./YearsList/YearsList";
@@ -23,7 +18,7 @@ export const Conrainer = () => {
     const prevDays                          =   onGetOtherMonthDays(onGetDaysInMonth(currnetMonth, currentYear), initWeekDayInMonth, "prev");
     const nexDays                           =   onGetOtherMonthDays(onGetDaysInMonth(currnetMonth, currentYear), endWeekDayInMonth, "next");
 
-    const onSwitchMonth = (option: "next" | "prev") => {
+    const onSwitchMonth = (option: ToperationOption) => {
         if (option === "next") {
             setCurrnetMonth((month) => (month < 12 ? month + 1 : 1));
             setCurrentYear((year) => (currnetMonth < 12 ? year : year + 1));
@@ -39,35 +34,42 @@ export const Conrainer = () => {
         option === "prev" && setCurrentYear((year) => year - 1);
     };
 
-    return (
-        <div className="custom_calendar__container">
-            {mode === "days" && (
-                <DaysList
-                    currentDaysList={currentDaysList}
-                    nexDays={nexDays}
-                    prevDays={prevDays}
-                    currnetMonth={MONTHS_MAPPER[currnetMonth]}
-                    currentYear={currentYear}
-                    onSwitchMonth={onSwitchMonth}
-                    onSwitchYear={onSwitchYear}
-                    setMode={setMode}
-                />
-            )}
-            {mode === "months" && (
-                <MonthsList
-                    onSwitchYear={onSwitchYear}
-                    onSetMonth={setCurrnetMonth}
-                    currentYear={currentYear}
-                    setMode={setMode}
-                />
-            )}
-            {mode === "years" && (
-                <YearsList
-                    currentYear={currentYear}
-                    setCurrentYear={setCurrentYear}
-                    setMode={setMode}
-                />
-            )}
-        </div>
-    );
+    switch (mode) {
+        case "years":
+            return (
+                <div className="custom_main_calendar__container">
+                    <YearsList
+                        currentYear={currentYear}
+                        setCurrentYear={setCurrentYear}
+                        setMode={setMode}
+                    />
+                </div>
+            );
+        case "months":
+            return (
+                <div className="custom_main_calendar__container">
+                    <MonthsList
+                        onSwitchYear={onSwitchYear}
+                        onSetMonth={setCurrnetMonth}
+                        currentYear={currentYear}
+                        setMode={setMode}
+                    />
+                </div>
+            );
+        default:
+            return (
+                <div className="custom_main_calendar__container">
+                    <DaysList
+                        currentDaysList={currentDaysList}
+                        nexDays={nexDays}
+                        prevDays={prevDays}
+                        currnetMonth={MONTHS_MAPPER[currnetMonth]}
+                        currentYear={currentYear}
+                        onSwitchMonth={onSwitchMonth}
+                        onSwitchYear={onSwitchYear}
+                        setMode={setMode}
+                    />
+                </div>
+            );
+    }
 };

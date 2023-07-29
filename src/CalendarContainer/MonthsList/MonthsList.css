@@ -1,14 +1,14 @@
 .months__wrapper {
-    margin-top: 30px;
+    margin-top: 70px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 1fr;
-    gap: 10px;
+    gap: 20px;
 }
 
 .months__item {
     cursor: pointer;
-    padding: 20px;
+    padding: 20px 10px;
     display: flex;
     justify-content: center;
     align-items: center;
